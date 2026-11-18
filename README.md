@@ -38,7 +38,7 @@ Diferente de protótipos estáticos com dados simulados no navegador, toda a apl
 | **Motor de SLA & Máquina de Estados** | `src/server/queues/sla.ts` aplica pesos de prioridade (`URGENT > HIGH > NORMAL`), recalcula prazos de SLA (`HEALTHY`, `WARNING`, `BREACHED`) e bloqueia transições inválidas (`WAITING -> COMPLETED` retorna `409 Conflict`). |
 | **Webhooks HMAC-SHA256 & Idempotência** | `src/server/webhooks/hmac.ts` e `ingest.ts` implementam assinatura `t=<unix>,v1=<hex>` com verificação em tempo constante (`crypto.timingSafeEqual`), janela anti-replay (300s) e constraint única `(organizationId, direction, idempotencyKey)` — reenviar a mesma `Idempotency-Key` retorna `HTTP 200` com `deduplicated: true`. |
 | **Fila Transacional Outbox & Auditoria** | Cada criação/chamada de ticket grava log em `audit_logs` e cria job em `outbox_jobs` com política de retry em backoff exponencial (`computeNextRetryDelaySeconds`) e estado `DEAD_LETTER`. |
-| **Testes em 3 Camadas + CI/CD** | Testes unitários (`tests/unit/` via **Vitest**), testes ponta a ponta no navegador real (`tests/e2e/pulsequeue.spec.ts` via **Playwright**) e pipeline **GitHub Actions** em `.github/workflows/ci.yml` subindo um serviço `postgres:16-alpine` real a cada push. |
+| **Testes em 3 Camadas + CI/CD** | Testes unitários (`tests/unit/` via **Vitest**), testes ponta a ponta no navegador real (`tests/e2e/pulsequeue.spec.ts` via **Playwright**) e pipeline **GitHub Actions** definido em `ci/github-actions-ci.yml` (pronto para ativar em `.github/workflows/ci.yml`) subindo serviço `postgres:16-alpine` real. |
 
 ---
 

@@ -220,7 +220,7 @@ export default function HomePage() {
               <p className="mt-2 text-slate-300">
                 Testes unitários em Vitest, testes E2E reais com Playwright e
                 pipeline GitHub Actions com PostgreSQL 16 em{" "}
-                <code>.github/workflows/ci.yml</code>.
+                <code>ci/github-actions-ci.yml</code>.
               </p>
             </div>
           </div>
